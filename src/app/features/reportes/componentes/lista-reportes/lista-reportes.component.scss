@@ -1,0 +1,24 @@
+/* document-tree.component.scss */
+
+/* Hace que el hover sobre el item de documento cambie el fondo ligeramente */
+.list-group-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Quita el padding izquierdo de la lista no numerada para procesos */
+ul.list-unstyled {
+    padding-left: 0;
+}
+
+/* Ajuste para alinear mejor el texto de “Expediente:” */
+.ms-1 {
+    margin-left: 0.25rem !important;
+}
+
+.dropdown-item:hover{
+    background-color: lightgrey;
+}
+
+.card-header{
+    padding: 0 !important;
+}

@@ -1,0 +1,27 @@
+<div class="col-xl-12">
+    <app-card [hidHeader]="true" [options]="false" blockClass="table-border-style">
+        <div class="table-responsive table-outer">
+            <table class="table table-styling" *ngIf="roles.length > 0;">
+                <thead>
+                    <tr class="table-primary">
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of users; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.apellido}}</td>
+                        <td>{{p.email}}</td>
+                        <td>{{obtenerRol(p.rol.id)}}</td>
+                        <!-- <td>{{p.rol.id}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-card>
+</div>

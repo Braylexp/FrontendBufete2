@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Registrar Rol" [options]="false">
+            <h5>Información</h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <form [formGroup]="form">
+                        <div class="mb-3">
+                            <label class="form-label">*Nombre del Rol</label>
+                            <input type="text" formControlName="nombre" class="form-control" name="nombre"
+                                placeholder="Ej. Cliente">
+                            <div *ngIf="form.get('nombre')!.hasError('required') && form.get('nombre')!.touched" style="color:red">
+                                El nombre es requerido.
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="crear()" [disabled]="form.invalid">
+                            Registrar</button>
+
+                        <!-- <button type="button" class="btn btn-primary" (click)="createRole()" [disabled]="form.invalid">
+                            Registrar</button> -->
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form [formGroup]="form">
+                        <div class="mb-3" class="dropdown-center centro-dropdown" ngbDropdown>
+                            <label class="form-label">*Permisos</label>
+                            <button class="form-control text-start" ngbDropdownToggle>Selecciona los permisos</button>
+                            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownManual">
+                                <div *ngFor="let p of permissions" class="form-check item">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="permisosControl.value.includes(p.nombre)"
+                                        (change)="onPermisoToggle(p.nombre, $any($event.target).checked)"/>
+                                    <label class="form-check-label">{{ p.descripcion }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!(permisosControl.value.length >1) && form.get('permisos')!.touched" style="color:red">
+                            El permiso es requerido. {{permisosControl.value.length}}
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </app-card>
+    </div>
+    <div class="col-xl-12">
+        <app-card cardTitle="Roles Existentes" [options]="false" blockClass="table-border-style">
+            <div class="table-outer">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th *ngFor="let p of permisos">{{ p.descripcion }}</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of roles">
+                            <td>{{ r.nombre }}</td>
+
+                            <!-- una columna checkbox por permiso -->
+                            <td *ngFor="let p of permisos" class="text-center">
+                                <input type="checkbox" [checked]="r.permisosSet.has(p.nombre)" [disabled]="!r.editing"
+                                    (change)="onPermisoRowToggle(r, p.nombre, $any($event.target).checked)">
+                            </td>
+
+                            <td>
+                                <button class="btn btn-sm" [ngClass]="r.editing ? 'btn-success' : 'btn-outline-primary'" [disabled] = "r.nombre === 'Administrador'"
+                                    (click)="toggleEdit(r)">
+                                    <i [ngClass]="r.editing ? 'feather icon-save' : 'feather icon-edit-2'"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+<!-- <div class="roles-container">
+    <mat-card class="roles-card">
+        <form [formGroup]="form" (ngSubmit)="editing ? saveRole() : addRole()">
+            <mat-form-field appearance="fill"><mat-label>Nombre del Rol</mat-label><input matInput
+                    formControlName="name" /></mat-form-field>
+            <mat-form-field appearance="fill"><mat-label>Permisos</mat-label><mat-select formControlName="permissions"
+                    multiple>
+                    <mat-option *ngFor="let p of permissions" [value]="p.key">{{ p.label }}</mat-option>
+                </mat-select></mat-form-field>
+            <button mat-raised-button color="primary" type="submit">{{ editing ? 'Guardar' : 'Agregar' }}</button>
+            <button mat-button type="button" (click)="cancelEdit()" *ngIf="editing">Cancelar</button>
+        </form>
+    </mat-card>
+
+    <mat-card class="list-card">
+        <mat-card-title>Roles Existentes</mat-card-title>
+        <div class="table-container">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                </ng-container>
+                <ng-container *ngFor="let p of permissions" [matColumnDef]="p.key">
+                    <th mat-header-cell *matHeaderCellDef>{{p.label}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <mat-checkbox [checked]="element.permissions.includes(p.key)" [disabled]="editIndex !== i">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="accions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <button mat-icon-button color="primary" *ngIf="editIndex !== i" (click)="edittableRole(i)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" *ngIf="editIndex === i" (click)="savetableRole(i)">
+                            <mat-icon>save</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </mat-card>
+</div> -->

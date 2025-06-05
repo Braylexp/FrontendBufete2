@@ -1,0 +1,101 @@
+<p style="text-align: center;">
+	Esta pantalla permite realizar la gestión de las plantillas jurídicas
+</p>
+<hr>
+<form>
+	<div class="mb-3 row">
+		<label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Categoría:</label>
+		<div class="col-xs-3 col-sm-auto">
+			<select class="form-select" aria-label="Default select example">
+				<option value='' selected disabled hidden>Seleccione una Categoría</option>
+				<option value="1">Familia</option>
+				<option value="2">Civil</option>
+				<option value="3">Penal</option>
+				<option value="4">Laboral</option>
+				<option value="5">Administrativo</option>
+			</select>
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<div class="col-sm-8">
+			<div class="row">
+				<label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Nombre
+					Plantilla:</label>
+				<div class="col-xs-3 col-sm-auto">
+					<input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4" style="display: flex; justify-content: end;">
+			<button type="button" (click)="openModal()" class="btn btn-secondary"
+				style="display: flex; justify-content: center; align-items: center; border-color: transparent;">
+				<i class="feather icon-plus-circle" style="font-size: 20px; padding-right: 8px;"></i>
+				Crear Plantilla
+			</button>
+		</div>
+	</div>
+</form>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="table-outer">
+				<table class="table table-bordered" style="text-align: center;">
+					<thead>
+						<tr class="table-primary">
+							<th scope="col">Nombre de Plantilla</th>
+							<th scope="col">Categoría</th>
+							<th scope="col">Fecha de Subida</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody class="table align-middle">
+						@for (country of countries$ | async; track country.name) {
+						<tr>
+							<td>{{ country.name }}</td>
+							<td>
+								{{ country.category }}
+							</td>
+							<td>
+								{{country.area.toLocaleDateString('es-ES', {
+								year: 'numeric',
+								month: '2-digit',
+								day: '2-digit',
+								})}}
+							</td>
+							<!-- <td>{{ country.area.getFullYear() +"/"+country.area.getMonth()+"/"+country.area.getDate() }}</td> -->
+							<td>
+								<div class="btn-group" role="group" aria-label="Basic outlined example">
+									<button type="button" class="btn btn-md btn-outline-primary">
+										<i class="feather icon-edit-2"></i>
+									</button>
+									<button type="button" class="btn btn-md btn-outline-danger">
+										<i class="feather icon-trash-2"></i>
+									</button>
+									<button type="button" class="btn btn-md btn-outline-success">
+										<i class="feather icon-download"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="d-flex justify-content-between p-2">
+				<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+					(pageChange)="refreshCountries()">
+				</ngb-pagination>
+
+				<select class="form-select" style="width: auto" [(ngModel)]="pageSize"
+					(ngModelChange)="refreshCountries()">
+					<option [ngValue]="10">10 items</option>
+					<option [ngValue]="20">20 items</option>
+					<option [ngValue]="50">50 items</option>
+				</select>
+			</div>
+
+		</div>
+	</div>
+</div>
