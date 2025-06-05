@@ -7,7 +7,7 @@ import { SharedModule } from './features/shared/shared.module';
 @Component({
   selector: 'app-root',
   imports: [RouterModule, HttpClientModule],
-  template: './app.component.html',
+  templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
