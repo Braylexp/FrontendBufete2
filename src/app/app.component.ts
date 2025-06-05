@@ -11,5 +11,5 @@ import { SharedModule } from './features/shared/shared.module';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'FrontendBufete';
+  title = 'Fronten dBufete';
 }
