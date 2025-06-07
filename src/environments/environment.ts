@@ -8,7 +8,8 @@ export const environment = {
   appVersion: packageInfo.version,
   production: false,
 
-  /* apiUrl: 'http://localhost:4200',
+  apiUrl: 'http://localhost:4200',
+  /*
   apiUrlEventos: 'http://localhost:4200/assets/datas/eventos.json',
   apiUrlPermisos: 'http://localhost:4200/assets/datas/permisos.json',
   apiUrlUser: 'http://localhost:4200/assets/datas/users.json',
