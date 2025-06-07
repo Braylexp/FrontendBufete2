@@ -7,11 +7,19 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: false,
+
+  /* apiUrl: 'http://localhost:4200',
   apiUrlEventos: 'http://localhost:4200/assets/datas/eventos.json',
   apiUrlPermisos: 'http://localhost:4200/assets/datas/permisos.json',
   apiUrlUser: 'http://localhost:4200/assets/datas/users.json',
-  apiUrlRoles: 'http://localhost:4200/assets/datas/roles.json',
-  apiUrl: 'http://localhost:8084/api'
+  apiUrlRoles: 'http://localhost:4200/assets/datas/roles.json', */
+  
+  /* apiUrl: 'https://bufete-abogados.onrender.com', */
+  apiUrlEventos: 'https://bufete-abogados.onrender.com/assets/datas/eventos.json',
+  apiUrlPermisos: 'https://bufete-abogados.onrender.com/assets/datas/permisos.json',
+  apiUrlUser: 'https://bufete-abogados.onrender.com/assets/datas/users.json',
+  apiUrlRoles: 'https://bufete-abogados.onrender.com/assets/datas/roles.json'
+
 };
 
 /*
